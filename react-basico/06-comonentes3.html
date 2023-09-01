@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .soma {
+            border-radius: 8px;
+            border: 3px solid royalblue;
+            padding: 8px;
+            margin: 8px;
+        }
+        .direita {
+            text-align: right;
+            background-color: lightgreen;
+        }
+        .centro {
+            text-align: center;
+            background-color: tan;
+        }
+    </style>
+</head>
+
+<body>
+    <script src="https://unpkg.com/react@18/umd/react.development.js" type="text/javascript"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" type="text/javascript"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js" type="text/javascript"></script>
+
+    <div id="root"></div>
+
+    <script type="text/babel">
+
+        /*
+            Componente que exibe a soma de dois números
+            Aqui, temos um caso em que props personalizadas e genéricas
+            são usadas ao mesmo tempo
+        */
+       function Soma({num1, num2, ...props}) {
+        return <div className="soma" {...props}>
+                A soma de {num1} e {num2} é {num1 + num2}
+            </div>
+       }
+
+       // Componente que recebe apenas props genéricas
+       function ParagCentro(props) {
+        return <p className="centro" {...props}/>
+       }
+
+       // Componente que recebe apenas props personalizadas
+       function ParagDireita({id, children}) {
+        return <p className="direita" id={id} > {children} </p>
+       }
+
+       const container =
+       <>
+            {/* Props cujo valor NÃO é string devem ser passadas entre {} */}
+            <Soma id="soma1" title="Exemplo de soma" num1={25} num2={19} />
+
+            <ParagCentro id="parag1" title="centralizado" seila="não sei">
+                Texto centralizado                
+            </ParagCentro>
+
+            <ParagDireita id="parag2" title="à direita" seila="não sei">
+                Texto à direita 
+            </ParagDireita>
+       </>
+
+       const root = ReactDOM.createRoot(document.getElementById('root'))
+       root.render(container)
+    </script>
+</body>
+
+</html>

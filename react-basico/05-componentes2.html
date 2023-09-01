@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .msg {
+            border-radius: 4px;
+            border: 2px solid red;
+            background-color: khaki;
+            padding: 16px;
+            text-align: center;
+            font-family: Calibri, Arial, sans-serif;
+            margin-bottom: 16px;
+        }
+    </style>
+</head>
+
+<body>
+    <script src="https://unpkg.com/react@18/umd/react.development.js" type="text/javascript"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" type="text/javascript"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js" type="text/javascript"></script>
+
+    <div id="root"></div>
+
+    <script type="text/babel">
+
+        // Função de componente com props genéricas
+        function Mensagem(props) {
+            console.log(props)
+            return <div className="msg" {...props} />
+        }
+
+        // Função de componente com props personalizadas
+        // Somente as props explicitamente mencionadas serão recebidas e processadas
+        function Aviso({ id, children }) {
+            return <div className="msg" id={id} > {children} </div>
+        }
+
+        const container =
+            <>
+                <Mensagem id="msg1" title="Primeira Mensagem" children="Isto é uma mensagem" teste="Meu teste" />
+         
+                <Aviso id="msg2" title="Segunda Mensagem" children="Isto é outra mensagem" teste="Meu teste 2" />
+            </>
+
+        const root = ReactDOM.createRoot(document.getElementById('root'))
+        root.render(container)
+
+    </script>
+</body>
+
+</html>

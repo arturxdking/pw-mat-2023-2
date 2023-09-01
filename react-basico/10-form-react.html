@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="08.css">
+</head>
+<body>
+
+  <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  
+  <div id="root"></div>
+
+  <script type="text/babel">
+    
+    function Form() {
+
+      /*
+        Refs são um recurso do React que permite referenciar
+        elementos e componentes sem usar id
+      */
+      const nomeRef = React.useRef()
+      const sobrenomeRef = React.useRef()
+      const maiuscRef = React.useRef()
+      const resultRef = React.useRef()
+
+      let nome, sobrenome, maiusc
+
+      function handleChange(event) {
+        maiusc = maiuscRef.current.checked
+
+        if(maiusc) {
+          nome = nomeRef.current.value.toUpperCase()
+          sobrenome = sobrenomeRef.current.value.toUpperCase()
+        }
+        else {
+          nome = nomeRef.current.value
+          sobrenome = sobrenomeRef.current.value
+        }
+
+        resultRef.current.textContent = nome + ' ' + sobrenome
+      }
+
+      function handleSubmit(event) {
+        event.preventDefault()
+        alert(`Olá, ${nome} ${sobrenome}`)
+      }
+
+      return <>
+          <h1>Formulário React</h1>
+
+          <form onSubmit={handleSubmit}>
+            
+            <div>
+              <label>
+                <span>Nome</span><br />
+                <input ref={nomeRef} onChange={handleChange} />
+              </label>
+            </div>
+
+            <div>
+              <label>
+                <span>Sobrenome</span> <br />
+                <input ref={sobrenomeRef} onChange={handleChange} />
+              </label>
+            </div>
+
+            <div>
+              <label>
+                <input type="checkbox" ref={maiuscRef} onClick={handleChange} />
+                &nbsp;
+                <span>Colocar o nome completo em MAIÚSCULAS</span> <br />
+              </label>
+            </div>
+
+            <div 
+              style={{ borderRadius: '10px', border: '1px solid blue' }}
+              ref={resultRef}
+            />
+
+            <div>
+              <input type="submit" value="Enviar" />
+            </div>
+          </form>
+        </>
+    }
+
+    const container =
+      <>
+        <Form />
+        <hr/>
+        <Form />
+      </>
+
+    const root = ReactDOM.createRoot(document.getElementById('root'))
+    root.render(container)
+
+  </script>
+  
+</body>
+</html>
