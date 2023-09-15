@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <div id="root"></div>
+
+    <script type="text/babel">
+
+        /*
+            Formulário que pede dois número e exibe a soma deles
+        */
+
+        function Form() {
+
+            // let num1, num2
+
+            /*
+                VARIÁVEIS DE ESTADO
+                São variáveis capazes de peservar seu valor
+                entre atualizações do componente
+            */
+
+            const [num1, setNum1] = React.useState()
+            const [num2, setNum2] = React.useState()
+
+            // function handleChange1(event) {
+            //     console.count('Atualizou!')
+            //     // Chamada à função de atualização de variável de estado num1
+            //     setNum1(event.target.value)
+            // }
+            // function handleChange2(event) {
+            //     console.count('Atualizou!')
+            //     // Chamada à função de atualização de variável de estado num2
+            //     setNum2(event.target.value)
+            // }
+
+            return <>
+                <h1>Soma dois números</h1>
+                <form>
+                    <div>
+                        <label>
+                            <span>Primeiro número</span><br />
+                            {/*
+                                COMPONENTE CONTROLADO
+                                Ocorre quando o onChange do componente atualiza uma 
+                                variável de estado, que depois é lida de volta na 
+                                propriedade value, Chama-se controlado porque, nesse
+                                caso, é React quem está no controle da mudança do 
+                                valor do componente
+                            */}
+                        {/*    <input type="number" onChange={handleChange1} value={num1} /> */}
+                        <input 
+                            type="number"
+                            onChange={event => setNum1(event.target.value)}
+                            value={num1}
+                        />
+                        </label>
+                    </div>
+                    <div>
+                        <label>
+                            <span>Segundo número</span><br />
+                        {/*    <input type="number" onChange={handleChange2} value={num2}/> */}
+                        <input 
+                            type="number"
+                            onChange={event => setNum2(event.target.value)}
+                            value={num2} 
+                        />
+                        </label>
+                    </div>
+                    <div>
+                        <div>
+                            Soma: {Number(num1) + Number(num2)}
+                        </div>
+                    </div>
+                </form>
+            </>
+        }
+
+        const container = <>
+            <Form />
+        </>
+
+        const root = ReactDOM.createRoot(document.getElementById('root'))
+        root.render(container)
+    </script>
+
+</body>
+
+</html>
