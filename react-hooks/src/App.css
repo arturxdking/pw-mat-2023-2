@@ -263,3 +263,17 @@ https://micku7zu.github.io/vanilla-tilt.js/index.html
     border: none;
     background-color: transparent;
   }
+
+  .lightTheme, .darkTheme {
+    padding: 16px;
+  }
+
+  .lightTheme, .lightTheme * {
+    background-color: white;
+    color: black;
+  }
+
+  .darkTheme, .darkTheme * {
+    background-color: black;
+    color: white;
+  }
